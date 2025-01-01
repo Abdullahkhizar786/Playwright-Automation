@@ -30,7 +30,7 @@ test.describe("Task no 1", () => {
     await Button.click();
   });
   test("TA02", async ({ page }) => {
-    await page.goto("https://demoqa.com/");
+    await page.goto("https://demoqa.com/"); 
     await page.getByRole("heading", { name: "Elements" }).click();
     await page.getByText("Broken Links - Images").click();
     await expect(page.locator("img").nth(3)).toBeVisible();
@@ -52,10 +52,7 @@ test.describe("Task no 1", () => {
     const subjectsInput = page.locator('input[id="subjectsInput"]');
     await subjectsInput.type("Maths", { delay: 100 });
     await page.locator("#react-select-2-option-0").click();
-    await page
-      .locator("div")
-      .filter({ hasText: /^Music$/ })
-      .click();
+    await page.locator("div").filter({ hasText: /^Music$/ }).click();
     await page.locator('input[type="file"]').setInputFiles("C:/Users/PC/Downloads/image (4).png");
     await page.getByPlaceholder("Current Address").fill("lahore");
     await page.locator("#state svg").click();
