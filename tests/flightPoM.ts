@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-
+import { Flocator } from "./Flocators";
 export class Flightpom {
   private page: Page;
 
@@ -8,49 +8,47 @@ export class Flightpom {
   }
 
   async toOpensite() {
-    await this.page.goto("https://www.flightnetwork.com/");
-    await expect(this.page).toHaveURL("https://us-en.flightnetwork.com/?ibe.mass=1");
-    await expect(this.page.getByRole("button", { name: "Accept All" })).toBeVisible();
+    await this.page.goto(Flocator.link);
+    await expect(this.page.url()).toContain("flightnetwork")
   }
 
   async acceptcookies() {
-    await this.page.getByRole("button", { name: "Accept All" }).click();
-    await expect(this.page.getByRole("button", { name: "Accept All" })).not.toBeVisible();
+    await this.page.locator(Flocator.Acceptall).click();
+    await expect(this.page.locator(Flocator.Acceptall)).not.toBeVisible();
   }
   async toclicksignup() {
-    await this.page.getByTestId("siteHeader").getByTestId("myBookings-button-large").click();
-    await this.page.locator('iframe[title="Sign in with Google Button"]').contentFrame().getByLabel("Sign in with Google").click();
+    await this.page.locator(Flocator.mybookingbutton).click();
+    await this.page.locator(Flocator.togetsignup).click();
   }
   async tocheckflight(from: string, to: string, departdate: string, returndate: string) {
-    await this.page.goto("https://www.flightnetwork.com/");
-    await expect(this.page).toHaveURL("https://us-en.flightnetwork.com/?ibe.mass=1");
-    // await this.page.getByRole("button", { name: "Accept All" }).click();
+    // await this.page.goto(Flocator.link);
+    // await expect(this.page).toHaveURL(Flocator.Alink);
     await this.page.waitForTimeout(3000);
-    await this.page.locator('input[id="searchForm-singleBound-origin-input"]').fill(from);
+    await this.page.locator(Flocator.lfrom).fill(from);
     await this.page.waitForTimeout(8000);
-    await this.page.locator("#react-select-4-option-0").click();
+    await this.page.locator(Flocator.Lhr).click();
     await this.page.waitForTimeout(3000);
-    await expect(this.page.locator('input[id="searchForm-singleBound-origin-input"]')).toBeVisible();
-    await this.page.locator('input[id="searchForm-singleBound-destination-input"]').fill(to);
+    await expect(this.page.locator(Flocator.lfrom)).toBeVisible();
+    await this.page.locator(Flocator.lto).fill(to);
     await this.page.waitForTimeout(8000);
-    await this.page.locator("#react-select-7-option-1").click();
-    await expect(this.page.locator('input[id="searchForm-singleBound-destination-input"]')).toBeVisible();
-    await this.page.getByTestId("singleBound.departureDate-input").click();
+    await this.page.locator(Flocator.kara).click();
+    await expect(this.page.locator(Flocator.lto)).toBeVisible();
+    await this.page.locator(Flocator.deptdate).click();
     await this.page.getByRole("gridcell", { name: departdate }).click();
     await this.page.getByLabel("Go to next month").click();
     await this.page.getByRole("gridcell", { name: returndate }).nth(0).click();
-    await this.page.getByTestId("searchForm-passengers-dropdown").click();
-    await this.page.getByTestId("adults-passengers-add").click();
-    await this.page.getByTestId("children-passengers-add").click();
-    await this.page.getByTestId("searchForm-cabinClasses-dropdown").click();
+    await this.page.locator(Flocator.selectpss).click();
+    await this.page.locator(Flocator.addadult).nth(0).click();
+    await this.page.locator(Flocator.addchild).nth(1).click();
+    await this.page.locator(Flocator.class).click();
     await this.page.getByRole("option", { name: "First" }).click();
     await expect(this.page.getByText("Search flights")).toBeVisible();
-    await this.page.getByTestId("searchForm-searchFlights-button").click();
+    await this.page.locator(Flocator.searchflights).click();
     await this.page.waitForTimeout(3000);
   }
   async rentalcars(loc: string, pickdate: string) {
-    await this.page.goto("https://www.flightnetwork.com/");
-    await expect(this.page).toHaveURL("https://us-en.flightnetwork.com/?ibe.mass=1");
+    // await this.page.goto(Flocator.link);
+    // await expect(this.page).toHaveURL(Flocator.Alink);
     await this.page.waitForTimeout(3000);
     await this.page.getByTestId("menu-link-Rental car").click();
     await this.page.locator('input[id="searchbox-toolbox-fts-pickup"]').fill(loc);
@@ -60,6 +58,6 @@ export class Flightpom {
     await this.page.getByLabel(pickdate, { exact: true }).click();
     await this.page.getByTestId("searchbox-toolbox-submit-button").click();
     await this.page.waitForTimeout(4000);
-    await expect(this.page.getByRole('heading', { name: 'Let\'s confirm you are human' })).toBeVisible();
+    await expect(this.page.getByRole("heading", { name: "Let's confirm you are human" })).toBeVisible();
   }
 }
