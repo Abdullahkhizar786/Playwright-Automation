@@ -17,5 +17,7 @@ export const Flocator = {
   addchild: '[class="css-vqwtyu"]',
   class: '[class="_1l9hnubc _1l9hnubb"]',
   searchflights: '[data-testid="searchForm-searchFlights-button"]',
-  
+  Rentcars: "#menu-link-Rental cars",
+  pickupCar: '[input[id="#searchbox-toolbox-fts-pickup"]',
+  pickdate: "#searchbox-toolbox-date-picker-pickup-date",
 };

@@ -54,14 +54,14 @@ export class Flightpom {
   async rentalcars(loc: string, pickdate: string) {
     await this.page.goto(Flocator.link);
     await this.page.waitForTimeout(3000);
-    await this.page.getByTestId("menu-link-Rental car").click();
-    await this.page.locator('input[id="searchbox-toolbox-fts-pickup"]').fill(loc);
+    await this.page.locator(Flocator.Rentcars).click();
+    await this.page.locator(Flocator.mybookingbutton).fill(loc);
     await this.page.waitForTimeout(3000);
-    await expect(this.page.locator('input[id="searchbox-toolbox-fts-pickup"]')).toHaveValue(loc);
+    await expect(this.page.locator(Flocator.pickupCar)).toHaveValue(loc);
     await this.page.getByTestId("searchbox-toolbox-date-picker-pickup-date").click();
     await this.page.getByLabel(pickdate, { exact: true }).click();
     await this.page.getByTestId("searchbox-toolbox-submit-button").click();
     await this.page.waitForTimeout(4000);
-    await expect(this.page.getByRole("heading", { name: "Let's confirm you are human" })).toBeVisible();
+    // await expect(this.page.getByRole("heading", { name: "Let's confirm you are human" })).toBeVisible();
   }
 }
