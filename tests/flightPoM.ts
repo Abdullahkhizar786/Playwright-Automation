@@ -58,6 +58,8 @@ export class Flightpom {
     // await this.page.getByTestId("menu-link-Rental car").click();
     await this.page.waitForTimeout(3000);
     await this.page.locator(Flocator.pickupCar).fill(loc);
+    await this.page.waitForTimeout(5000)
+    // await this.page.getByRole("button", { name: "City Lahore Lahore, Punjab" }).click();
     await this.page.locator(Flocator.SearchC).nth(0).click();
     // await this.page.getByRole("button", { name: "City Lahore Lahore, Punjab" }).click();
 

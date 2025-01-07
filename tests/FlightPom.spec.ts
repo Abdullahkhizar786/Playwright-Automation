@@ -12,6 +12,6 @@ test.describe("Flight Network", () => {
     // await flightpom.acceptcookies();
     // await flightpom.toclicksignup();
     // await flightpom.tocheckflight("Lahor", "Karach", "31", "2");
-    await flightpom.rentalcars("Lahore", "1 January 2025");
+    await flightpom.rentalcars("Lahor", "1 January 2025");
   });
 });
