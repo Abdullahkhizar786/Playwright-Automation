@@ -20,4 +20,5 @@ export const Flocator = {
   Rentcars: '[class="css-d7pjin"]',
   pickupCar: '[data-testid="searchbox-toolbox-fts-pickup"]',
   pickdate: "#searchbox-toolbox-date-picker-pickup-date",
+  SearchC: '[class="LPM_92786005"]',
 };
