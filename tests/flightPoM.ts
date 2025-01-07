@@ -49,33 +49,13 @@ export class Flightpom {
     await this.page.getByRole("option", { name: "First" }).click();
     await expect(this.page.getByText("Search flights")).toBeVisible();
     await this.page.locator(Flocator.searchflights).click();
-    //await this.page.waitForTimeout(3000);
   }
   async rentalcars(loc: string, pickdate: string) {
     await this.page.goto(Flocator.link);
     await this.page.waitForTimeout(3000);
     await this.page.locator(Flocator.Rentcars).nth(1).click();
-    // await this.page.getByTestId("menu-link-Rental car").click();
     await this.page.waitForTimeout(3000);
     await this.page.locator(Flocator.pickupCar).fill(loc);
-    await this.page.waitForTimeout(5000)
-    // await this.page.getByRole("button", { name: "City Lahore Lahore, Punjab" }).click();
     await this.page.locator(Flocator.SearchC).nth(0).click();
-    // await this.page.getByRole("button", { name: "City Lahore Lahore, Punjab" }).click();
-
-    // await this.page.goto(Flocator.link);
-    // await this.page.waitForTimeout(3000);
-    // await this.page.locator(Flocator.Rentcars).nth(2).click();
-    // // await this.page.locator(Flocator.pickupCar).fill(loc);
-    // await this.page.waitForTimeout(3000);
-    // await this.page.getByTestId('input[id="searchbox-toolbox-fts-pickup"]').fill(loc);
-    // // await this.page.locator('input[id="searchbox-toolbox-fts-pickup"]').fill(loc);
-    // await this.page.waitForTimeout(3000);
-    // await expect(this.page.locator('input[id="searchbox-toolbox-fts-pickup"]')).toHaveValue(loc);
-    // await this.page.getByTestId("searchbox-toolbox-date-picker-pickup-date").click();
-    // await this.page.getByLabel(pickdate, { exact: true }).click();
-    // await this.page.getByTestId("searchbox-toolbox-submit-button").click();
-    // await this.page.waitForTimeout(4000);
-    // await expect(this.page.getByRole("heading", { name: "Let's confirm you are human" })).toBeVisible();
   }
 }
