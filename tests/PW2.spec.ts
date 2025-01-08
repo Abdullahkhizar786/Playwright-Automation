@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import exp from "constants";
 
 test.describe("Task no 1", () => {
   test("TC01", async ({ page }) => {
@@ -30,19 +31,29 @@ test.describe("Task no 1", () => {
     await Button.click();
   });
   test("TA02", async ({ page }) => {
-    await page.goto("https://demoqa.com/"); 
+    await page.goto("https://demoqa.com/");
     await page.getByRole("heading", { name: "Elements" }).click();
     await page.getByText("Broken Links - Images").click();
     await expect(page.locator("img").nth(3)).toBeVisible();
     await expect(page.locator("img").nth(3)).toBeVisible();
   });
   test("TC03", async ({ page }) => {
+    test.setTimeout(90000);
     await page.goto("https://demoqa.com/");
     await page.getByRole("heading", { name: "Forms" }).click();
     await page.getByText("Practice Form").click();
+    // const firstname = page.locator('#firstName')
+    // await firstname.fill('Abdullah')
+    // await expect(firstname).toHaveValue('Abdullah')
     await page.getByPlaceholder("First Name").fill("Abdullah");
+    await page.waitForTimeout(3000);
+    await expect(page.locator('[class=" mr-sm-2 form-control"]').nth(0)).toHaveValue("Abdullah");
     await page.getByPlaceholder("Last Name").fill("khizar");
+    await expect(page.locator("#lastName")).toHaveValue("khizar");
+
     await page.getByPlaceholder("name@example.com").fill("khizar@gmail.com");
+    await expect(page.locator("#userEmail")).toHaveValue("khizar@gmail.com");
+
     await page.getByText("Male", { exact: true }).click();
     await page.getByPlaceholder("Mobile Number").fill("0987654323");
     await page.locator("#dateOfBirthInput").click();
@@ -57,8 +68,13 @@ test.describe("Task no 1", () => {
     await page.getByPlaceholder("Current Address").fill("lahore");
     await page.locator("#state svg").click();
     await page.getByText("Haryana").click();
+    await expect(page.locator('[class=" css-1hwfws3"]').nth(0)).toHaveText("Haryana");
+
     await page.locator("#city svg").click();
     await page.getByText("Panipat").click();
+    await expect(page.locator('[class=" css-1hwfws3"]').nth(1)).toHaveText("Panipat");
+
+    await expect(page.locator("#submit")).toBeVisible();
     await page.getByRole("button", { name: "Submit" }).click();
     await expect(page.getByText("Thanks for submitting the form")).toBeTruthy;
   });
@@ -88,4 +104,3 @@ test.describe("Task no 1", () => {
     expect(page.getByText("Dropped!")).toBeTruthy();
   });
 });
-
